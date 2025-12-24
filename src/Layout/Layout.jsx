@@ -8,9 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function Layout({ children, aramaMetni, setAramaMetni }) {
   const navigate = useNavigate();
-
   const cartItems = useSelector((state) => state.cart?.items) || [];
-  const favoriteItems = useSelector((state) => state.favorites?.items) || [];
 
   const handleNavClick = (path) => {
     if (setAramaMetni) setAramaMetni("");
@@ -21,14 +19,8 @@ function Layout({ children, aramaMetni, setAramaMetni }) {
     <div className="layout">
       <header className="navbar">
         <div className="navbar-container">
-
-          {/* ÜST SATIR: Logo, Arama ve İkonlar */}
           <div className="navbar-top">
-            <div
-              className="navbar-left"
-              onClick={() => handleNavClick("/haircare")}
-              style={{ cursor: "pointer" }}
-            >
+            <div className="navbar-left" onClick={() => handleNavClick("/haircare")} style={{ cursor: "pointer" }}>
               ROSSWOMAN
             </div>
 
@@ -39,33 +31,15 @@ function Layout({ children, aramaMetni, setAramaMetni }) {
                 value={aramaMetni || ""}
                 onChange={(e) => setAramaMetni && setAramaMetni(e.target.value)}
               />
-              {aramaMetni && (
-                <CgClose
-                  className="clear-icon"
-                  onClick={() => setAramaMetni && setAramaMetni("")}
-                />
-              )}
+              {aramaMetni && <CgClose className="clear-icon" onClick={() => setAramaMetni("")} />}
               <FaSearch className="search-icon" />
             </div>
 
             <div className="icons">
-              {/* Favorilerim Linki */}
-              <div
-                className="navbar-favorite-link"
-                onClick={() => navigate("/favorites")}
-                style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: "5px" }}
-              >
+              <div className="navbar-favorite-link" onClick={() => navigate("/favorites")} style={{ cursor: "pointer" }}>
                 <FaHeart size={20} title="Favorilerim" />
-                <span className="favorite-text">
-                  Favorilerim {favoriteItems.length > 0 ? `(${favoriteItems.length})` : ""}
-                </span>
               </div>
-
-              {/* Sepetim İkonu */}
-              <div
-                style={{ position: "relative", cursor: "pointer" }}
-                onClick={() => navigate("/cart")}
-              >
+              <div style={{ position: "relative", cursor: "pointer" }} onClick={() => navigate("/cart")}>
                 <FaShoppingCart size={20} title="Sepetim" />
                 {cartItems.length > 0 && (
                   <span className="badge-count">
@@ -74,37 +48,67 @@ function Layout({ children, aramaMetni, setAramaMetni }) {
                 )}
               </div>
 
-              <FaUserCircle
-                size={25}
-                onClick={() => navigate("/login")}
-                style={{ cursor: "pointer" }}
-              />
+              <div className="nav-item login-nav">
+                {/* onClick kaldırıldı, sadece ikon kaldı */}
+                <FaUserCircle size={25} className="user-icon" />
+
+                <div className="sub-menu login-sub">
+                  {/* Alt menü linkleri hala tıklanabilir durumda */}
+                  <a onClick={() => handleNavClick("/login")}>Giriş Yap</a>
+                  <a onClick={() => handleNavClick("/register")}>Üye Ol</a>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* ALT SATIR: Kategoriler */}
           <div className="navbar-bottom">
-            <a onClick={() => handleNavClick("/haircare")}>Saç Bakım</a>
-            <a onClick={() => handleNavClick("/makeup")}>Makyaj</a>
-            <a onClick={() => handleNavClick("/skincare")}>Cilt Bakım</a>
-            <a onClick={() => handleNavClick("/parfume")}>Parfüm</a>
+            <div className="nav-item">
+              <a onClick={() => handleNavClick("/haircare")}>Saç Bakım</a>
+              <div className="sub-menu">
+                <a onClick={() => handleNavClick("/haircare/sampuan")}>Şampuan</a>
+                <a onClick={() => handleNavClick("/haircare/krem")}>Saç Kremi</a>
+                <a onClick={() => handleNavClick("/haircare/maske")}>Saç Maskesi</a>
+              </div>
+            </div>
+
+            <div className="nav-item">
+              <a onClick={() => handleNavClick("/makeup")}>Makyaj</a>
+              <div className="sub-menu">
+                <a onClick={() => handleNavClick("/makeup/goz")}>Göz</a>
+                <a onClick={() => handleNavClick("/makeup/ten")}>Ten</a>
+                <a onClick={() => handleNavClick("/makeup/dudak")}>Dudak</a>
+              </div>
+            </div>
+
+            <div className="nav-item">
+              <a onClick={() => handleNavClick("/skincare")}>Cilt Bakım</a>
+              <div className="sub-menu">
+                <a onClick={() => handleNavClick("/skincare/temizleme")}>Temizleyiciler</a>
+                <a onClick={() => handleNavClick("/skincare/nemlendirici")}>Nemlendiriciler</a>
+              </div>
+            </div>
+
+            <div className="nav-item">
+              <a onClick={() => handleNavClick("/parfume")}>Parfüm</a>
+              <div className="sub-menu">
+                <a onClick={() => handleNavClick("/parfume/kadinparfum")}>Kadın Parfüm</a>
+                <a onClick={() => handleNavClick("/parfume/erkekparfum")}>Erkek</a>
+              </div>
+            </div>
           </div>
+        </div>
+      </header>
 
-        </div> {/* navbar-container KAPANIŞ */}
-      </header> {/* navbar KAPANIŞ */}
-
-      <main className="content">
-        {children}
-      </main>
+      <main className="content">{children}</main>
 
       <footer className="footer">
         <p>© 2025 RossWoman</p>
         <div className="social-buttons">
-          <a href="#"><FaInstagram /></a>
-          <a href="#"><FaXTwitter /></a>
-          <a href="#"><FaLinkedin /></a>
-          <a href="#"><FaTiktok /></a>
-          <a href="#"><FaYoutube /></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+          <a href="https://x.com/" target="_blank" rel="noopener noreferrer"><FaXTwitter /></a>
+          <a href="https://tr.linkedin.com/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+          <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer"><FaTiktok /></a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
         </div>
       </footer>
     </div>

@@ -1,41 +1,76 @@
-import Layout from "../Layout/Layout.jsx";
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom"; // Alt kategoriler için gerekli
 import { addToCart } from "../redux/cartSlice";
+import { toggleFavorite } from "../redux/FavoritesSlice";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import Layout from "../Layout/Layout.jsx";
 import "./Parfume.css";
 
-function Parfume({ aramaMetni, setAramaMetni }) { // Parantez içine propları ekledik
+function Parfume({ aramaMetni, setAramaMetni }) {
+  const { subCategory } = useParams(); // URL'den alt kategoriyi alıyoruz
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.cart?.allProducts) || [];
 
-  // Hem Parfume kategorisi olacak hem de isimde aramaMetni geçecek
-  const filteredProducts = products.filter(item =>
-    item.category === "Parfume" &&
-    item.name.toLowerCase().includes((aramaMetni || "").toLowerCase())
-  );
+  const products = useSelector((state) => state.cart?.allProducts) || [];
+  const favorites = useSelector((state) => state.favorites?.items) || [];
+
+  const filteredProducts = products.filter(item => {
+    // 1. Ana kategori Parfüm olmalı
+    const categoryMatch = item.category === "Parfume";
+
+    // 2. Alt kategori seçiliyse (Kadın/Erkek) ona uymalı, seçili değilse hepsi gelmeli
+    const subCategoryMatch = subCategory ? item.subCategory === subCategory : true;
+
+    // 3. Arama kutusu doluysa isme göre filtrele
+    const searchMatch = item.name.toLowerCase().includes((aramaMetni || "").toLowerCase());
+
+    return categoryMatch && subCategoryMatch && searchMatch;
+  });
 
   return (
     <Layout aramaMetni={aramaMetni} setAramaMetni={setAramaMetni}>
+      {/* Sadece ana Parfüm sayfasındaysa başlığı göster */}
+      {!subCategory && (
+        <h2 className="category-main-title">Tüm Parfümler</h2>
+      )}
+
       <div className="product-grid">
         {filteredProducts.length > 0 ? (
-          filteredProducts.map((item) => (
-            <div key={item.id} className="product-card">
-              <div>
-                <img src={item.image} alt={item.name} className="product-image" />
-                <h3 className="product-name">{item.name}</h3>
-              </div>
-              <div>
-                <div className="price-container">
-                  <span className="price-label">KALICI KOKU</span>
-                  <span className="product-price">{item.price}</span>
+          filteredProducts.map((item) => {
+            const isFavorite = favorites.some(fav => fav.id === item.id);
+            return (
+              <div key={item.id} className="product-card">
+                <div className="product-image-container">
+                  <img src={item.image} alt={item.name} className="product-image" />
+                  <div
+                    className="favorite-badge-icon"
+                    onClick={() => dispatch(toggleFavorite(item))}
+                  >
+                    {isFavorite ? (
+                      <FaHeart className="fav-icon filled" />
+                    ) : (
+                      <FaRegHeart className="fav-icon" />
+                    )}
+                  </div>
                 </div>
-                <button className="add-to-cart" onClick={() => dispatch(addToCart(item))}>
+
+                <h3 className="product-name">{item.name}</h3>
+
+                <div className="price-container">
+                  <span className="product-price">{item.price} ₺</span>
+                </div>
+
+                <button
+                  className="add-to-cart"
+                  onClick={() => dispatch(addToCart(item))}
+                >
                   Sepete Ekle
                 </button>
               </div>
-            </div>
-          ))
+            );
+          })
         ) : (
-          <p style={{ padding: "20px" }}>Aradığınız parfüm bulunamadı...</p>
+          <p className="no-products-message">Aradığınız parfüm bulunamadı...</p>
         )}
       </div>
     </Layout>

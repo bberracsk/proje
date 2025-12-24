@@ -1,8 +1,10 @@
+import React from "react";
 import Layout from "../Layout/Layout.jsx";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
 import { toggleFavorite } from "../redux/FavoritesSlice";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaShoppingCart } from "react-icons/fa";
+import "./Favorite.css";
 
 function Favorite({ aramaMetni, setAramaMetni }) {
     const dispatch = useDispatch();
@@ -10,33 +12,49 @@ function Favorite({ aramaMetni, setAramaMetni }) {
 
     return (
         <Layout aramaMetni={aramaMetni} setAramaMetni={setAramaMetni}>
-            <div className="favorites-container" style={{ padding: "40px" }}>
-                <h2 style={{ color: "#b4036d", marginBottom: "20px" }}>
-                    Favorilerim {favoriteItems.length > 0 ? `(${favoriteItems.length})` : ""}
-                </h2>
+            <div className="fav-page-container">
+                <h1 className="fav-title">Favorilerim</h1>
 
-                {favoriteItems.length > 0 ? (
-                    <div className="product-grid">
-                        {favoriteItems.map((item) => (
-                            <div key={item.id} className="product-card">
-                                <div className="product-image-container">
-                                    <img src={item.image} alt={item.name} className="product-image" />
-                                    <div className="favorite-badge-icon" onClick={() => dispatch(toggleFavorite(item))}>
-                                        <FaTrash color="#b4036d" size={14} />
-                                    </div>
-                                </div>
-                                <h3 className="product-name">{item.name}</h3>
-                                <div className="price-container">
-                                    <span className="product-price">{item.price} ₺</span>
-                                </div>
-                                <button className="add-to-cart" onClick={() => dispatch(addToCart(item))}>
-                                    Sepete Ekle
-                                </button>
-                            </div>
-                        ))}
+                {favoriteItems.length === 0 ? (
+                    <div className="empty-fav-message">
+                        <h2>Henüz favori ürününüz yok.</h2>
+                        <p>Beğendiğiniz ürünleri kalp ikonuna tıklayarak buraya ekleyebilirsiniz!</p>
                     </div>
                 ) : (
-                    <p>Favori ürününüz bulunmamaktadır.</p>
+                    <div className="fav-main-content">
+                        {/* Sol Kısım: Favori Ürün Kartları */}
+                        <div className="fav-items-section">
+                            {favoriteItems.map((item) => (
+                                <div key={item.id} className="fav-item-card">
+                                    <img src={item.image} alt={item.name} className="fav-item-img" />
+
+                                    <div className="fav-item-details">
+                                        <h3 className="fav-item-name">{item.name}</h3>
+                                        <p className="fav-item-price">{item.price} ₺</p>
+                                    </div>
+
+                                    <div className="fav-actions">
+                                        <button
+                                            className="fav-add-to-cart-btn"
+                                            onClick={() => dispatch(addToCart(item))}
+                                        >
+                                            <FaShoppingCart style={{ marginRight: "8px" }} />
+                                            Sepete Ekle
+                                        </button>
+
+                                        <button
+                                            className="fav-remove-btn"
+                                            onClick={() => dispatch(toggleFavorite(item))}
+                                        >
+                                            <FaTrash />
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+
+                    </div>
                 )}
             </div>
         </Layout>

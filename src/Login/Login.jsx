@@ -1,20 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import Layout from "../Layout/Layout.jsx";
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
-  const [activeForm, setActiveForm] = useState("login");
 
-  function login(e) {
+  function handleLogin(e) {
     e.preventDefault();
-
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const username = e.target.username.value;
+    const password = e.target.password.value;
 
     if (username === "bera" && password === "2103") {
-      navigate("/home");
+      navigate("/haircare");
     } else {
       alert("Kullanıcı adı veya şifre yanlış");
     }
@@ -23,60 +20,17 @@ function Login() {
   return (
     <Layout>
       <div className="login-page">
-        {/* ÜST SABİT YAZI */}
-        <h1 className="login-title">
-          ✨ROSSWOMAN DÜNYASINA KATIL✨
-        </h1>
-
+        <h1 className="login-title">✨ TEKRAR HOŞ GELDİN ✨</h1>
         <div className="login-box">
-          {/* SABİT FORM SEÇİCİ */}
-          <div className="form-switch">
-            <span
-              className={activeForm === "login" ? "active" : ""}
-              onClick={() => setActiveForm("login")}
-            >
-              Giriş Yap
-            </span>
-
-            <span
-              className={activeForm === "register" ? "active" : ""}
-              onClick={() => setActiveForm("register")}
-            >
-              Kayıt Ol
-            </span>
-          </div>
-
-          {/* DEĞİŞEN FORM ALANI */}
-          {activeForm === "login" && (
-            <form className="login-form" onSubmit={login}>
-              <input
-                id="username"
-                type="text"
-                placeholder="Kullanıcı adı"
-              />
-              <input
-                id="password"
-                type="password"
-                placeholder="Şifre"
-              />
-              <button>Giriş Yap</button>
-            </form>
-          )}
-
-          {activeForm === "register" && (
-            <form className="login-form">
-              {/* Ad ve Soyad yan yana */}
-              <div className="name-row">
-                <input type="text" placeholder="Ad" />
-                <input type="text" placeholder="Soyad" />
-              </div>
-
-              <input type="email" placeholder="E-posta" />
-              <input type="tel" placeholder="Telefon Numarası" />
-              <input type="password" placeholder="Şifre" />
-              <button>Kayıt Ol</button>
-            </form>
-          )}
+          <form className="login-form" onSubmit={handleLogin}>
+            <h2 style={{ color: "#b4036d", textAlign: "center", marginBottom: "10px" }}>Giriş Yap</h2>
+            <input name="username" type="text" placeholder="Kullanıcı adı" required />
+            <input name="password" type="password" placeholder="Şifre" required />
+            <button type="submit">Giriş Yap</button>
+            <p className="form-footer-text">
+              Henüz hesabın yok mu? <b onClick={() => navigate("/register")} style={{ cursor: "pointer", color: "#b4036d" }}>Üye Ol</b>
+            </p>
+          </form>
         </div>
       </div>
     </Layout>

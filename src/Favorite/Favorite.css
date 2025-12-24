@@ -1,0 +1,150 @@
+.fav-page-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    min-height: 70vh;
+}
+
+.fav-title {
+    font-size: 26px;
+    border-bottom: 2px solid #b4036d;
+    color: #b4036d;
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.fav-main-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.fav-items-section {
+    flex: 2;
+}
+
+.fav-item-card {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s;
+}
+
+.fav-item-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.fav-item-img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-right: 20px;
+}
+
+.fav-item-details {
+    flex: 1;
+}
+
+.fav-item-name {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.fav-item-price {
+    font-weight: bold;
+    color: #b4036d;
+    font-size: 18px;
+}
+
+/* Aksiyon Butonları */
+.fav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.fav-add-to-cart-btn {
+    background-color: #b4036d;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.fav-add-to-cart-btn:hover {
+    background-color: #db5ca8;
+    transform: translateY(-1px);
+}
+
+.fav-remove-btn {
+    background: none;
+    border: 1px solid #b4036d;
+    color: #b4036d;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.fav-remove-btn:hover {
+    background: #fdf2f8;
+    color: #db5ca8;
+    border-color: #db5ca8;
+}
+
+/* Sağ Panel (Summary Section) */
+.fav-summary-section {
+    flex: 1;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    position: sticky;
+    top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.fav-summary-section h3 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.fav-summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    color: #555;
+    font-weight: 600;
+}
+
+.fav-summary-info {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+/* Boş Favoriler */
+.empty-fav-message {
+    text-align: center;
+    padding: 80px 20px;
+    background: #fff;
+    border-radius: 10px;
+}

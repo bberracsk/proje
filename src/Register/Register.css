@@ -1,0 +1,144 @@
+/* ===== LOGIN ANA SAYFA YAPISI ===== */
+.login-page {
+    width: 100%;
+    /* calc yerine %100 kullanıyoruz */
+    min-height: calc(100vh - 160px);
+    /* Header ve footer payını çıkarıyoruz */
+    background-image: url('images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+    margin: 0;
+    /* Dış boşlukları sıfırladık */
+}
+
+/* ÜST BAŞLIK */
+.login-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #b4036d;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+/* ANA KAPSAYICI */
+.login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    /* Kutunun genişliği her iki form için sabit */
+}
+
+/* GİRİŞ / KAYIT SEÇİCİ */
+.form-switch {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #b4036d;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-switch span {
+    opacity: 0.6;
+    transition: 0.3s;
+    padding-bottom: 5px;
+    border-bottom: 3px solid transparent;
+    width: 120px;
+    /* Başlık alanları sabit, metin kayması yapmaz */
+    text-align: center;
+}
+
+.form-switch span.active {
+    opacity: 1;
+    border-bottom: 3px solid #b4036d;
+}
+
+/* FORM İÇERİĞİ */
+.login-form {
+    background: white;
+    padding: 30px;
+    width: 100%;
+    min-height: 400px;
+    /* Giriş ve Kayıt formlarının kutu boyutu artık sabit */
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-sizing: border-box;
+    /* Padding genişliği etkilemez */
+    justify-content: center;
+    /* İçerik kutu içinde dengeli durur */
+}
+
+/* AD SOYAD YAN YANA */
+.name-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.name-row input {
+    flex: 1;
+    min-width: 0;
+}
+
+/* TÜM INPUTLAR VE BUTONLARIN TAM EŞİTLENMESİ */
+.login-form input,
+.login-form button {
+    width: 100%;
+    height: 48px;
+    /* Yükseklik her iki formdaki tüm elemanlar için sabitlendi */
+    padding: 12px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.login-form input {
+    border: 1px solid #ddd;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #b4036d;
+}
+
+/* BUTONLARIN CSS'İ (Giriş ve Kayıt Butonları Artık Tamamen Aynı) */
+.login-form button {
+    border: none;
+    background: #b4036d;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+    /* Butonun üstündeki boşluk eşitlendi */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form button:hover {
+    background: #db5ca8;
+}
+
+.form-footer-text {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #666;
+    text-align: center;
+}

@@ -1,4 +1,4 @@
-/* ===== NAVBAR SABİTLEME ===== */
+/* ===== NAVBAR GENEL VE SABİTLEME ===== */
 .navbar {
   position: sticky;
   top: 0;
@@ -12,10 +12,9 @@
   width: 95%;
   padding: 10px 40px;
   margin: 0 auto;
-  /* Ortalamayı garantiye alalım */
 }
 
-/* Üst Satır */
+/* ===== ÜST SATIR (Logo, Arama, İkonlar) ===== */
 .navbar-top {
   display: flex;
   align-items: center;
@@ -31,7 +30,7 @@
   min-width: fit-content;
 }
 
-/* ===== ARAMA ÇUBUĞU (GÜNCELLENDİ) ===== */
+/* ===== ARAMA ÇUBUĞU ===== */
 .search-container {
   position: relative;
   flex: 1;
@@ -43,7 +42,6 @@
 
 .search-container input {
   width: 100%;
-  /* Sağ tarafa 2 ikon geleceği için padding'i artırdık */
   padding: 10px 70px 10px 15px;
   border-radius: 8px;
   border: 1px solid #db5ca8;
@@ -52,11 +50,9 @@
   font-size: 14px;
 }
 
-/* Çarpı İkonu (CgClose) */
 .clear-icon {
   position: absolute;
   right: 42px;
-  /* Büyütecin hemen solunda */
   cursor: pointer;
   color: #b4036d;
   font-size: 20px;
@@ -68,7 +64,6 @@
   transform: scale(1.1);
 }
 
-/* Büyüteç İkonu */
 .search-icon {
   position: absolute;
   right: 15px;
@@ -78,32 +73,7 @@
   font-size: 18px;
 }
 
-/* Alt Satır (Kategoriler) */
-.navbar-bottom {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  border-top: 1px solid rgba(219, 92, 168, 0.2);
-  padding-top: 10px;
-}
-
-.navbar-bottom a {
-  text-decoration: none;
-  color: #db5ca8;
-  font-weight: 700;
-  font-size: 16px;
-  transition: 0.3s;
-  padding-bottom: 5px;
-  cursor: pointer;
-  /* Tıklanabilir olduğunu belli eder */
-}
-
-.navbar-bottom a:hover {
-  color: #b4036d;
-  border-bottom: 2px solid #b4036d;
-}
-
-/* Sağ İkonlar */
+/* ===== İKONLAR (Sepet, Favori, Profil) ===== */
 .icons {
   display: flex;
   align-items: center;
@@ -120,7 +90,105 @@
   color: #db5ca8;
 }
 
-/* Genel Yapı */
+.badge-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #db5ca8;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* ===== ALT SATIR (KATEGORİLER VE DROPDOWN) ===== */
+.navbar-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  border-top: 1px solid rgba(219, 92, 168, 0.2);
+  padding-top: 10px;
+  position: relative;
+  overflow: visible !important;
+  /* Alt menülerin görünmesi için */
+}
+
+/* Ana Kategoriler Kapsayıcı */
+.nav-item {
+  position: relative;
+  display: inline-block;
+}
+
+/* Ana Kategori Linkleri (Saç Bakım, Makyaj vb.) */
+.navbar-bottom a,
+.nav-item>a {
+  text-decoration: none;
+  color: #db5ca8;
+  font-weight: 700;
+  font-size: 16px;
+  transition: 0.3s;
+  padding-bottom: 8px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Ana Kategori Hover Efekti */
+.navbar-bottom a:hover,
+.nav-item:hover>a {
+  color: #b4036d;
+  border-bottom: 2px solid #b4036d;
+}
+
+/* ===== ALT MENÜ (DROPDOWN-CONTENT) ===== */
+.sub-menu {
+  display: none;
+  /* Başlangıçta gizli */
+  position: absolute;
+  top: 100%;
+  /* Tam ana linkin altı */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px 0;
+  z-index: 2000;
+  border: 1px solid #f2dce9;
+  margin-top: 2px;
+}
+
+/* Mouse gelince alt menüyü aç */
+.nav-item:hover .sub-menu {
+  display: block;
+}
+
+/* Alt menü içindeki linkler (Şampuan vb.) */
+.sub-menu a {
+  display: block !important;
+  padding: 10px 20px !important;
+  color: #db5ca8 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid #fdf2f8 !important;
+  text-align: left !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.sub-menu a:last-child {
+  border-bottom: none !important;
+}
+
+.sub-menu a:hover {
+  background-color: #f2dce9 !important;
+  color: #b4036d !important;
+  border-bottom: 1px solid #fdf2f8 !important;
+}
+
+/* ===== GENEL YAPI VE FOOTER ===== */
 .layout {
   min-height: 100vh;
   display: flex;
@@ -138,7 +206,6 @@
   padding: 20px;
   color: #db5ca8;
   margin-top: auto;
-  /* Footer'ı hep en aşağıya iter */
 }
 
 .social-buttons {
@@ -153,32 +220,17 @@
   font-size: 24px;
 }
 
-.badge-count {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background: #db5ca8;
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-/* Ürün Kartı Resim Alanı */
+/* ===== FAVORİ VE DİĞER ÖZELLİKLER ===== */
 .product-image-container {
   position: relative;
   width: 100%;
 }
 
-/* Resim Üstündeki Kalp Butonu */
 .favorite-badge-icon {
   position: absolute;
   top: 10px;
   left: 10px;
-  /* Sağdan sola aldık */
   background: rgba(255, 255, 255, 0.9);
-  /* Biraz daha belirgin yaptık */
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
@@ -186,14 +238,12 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  /* Gölgeyi belirginleştirdik */
   transition: all 0.3s ease;
   z-index: 10;
 }
 
 .favorite-badge-icon:hover {
   transform: scale(1.15);
-  /* Üzerine gelince biraz daha büyüsün */
   background: white;
 }
 
@@ -208,11 +258,55 @@
   color: #db5ca8;
 }
 
-.favorite-text {
-  font-size: 14px;
-  font-weight: 600;
-  margin-left: 2px;
+
+/* Ana Kategori Kapsayıcısı */
+.nav-item {
+  position: static !important;
+  /* Bu çok önemli! Alt menünün kelimeye değil, navbar'a göre hizalanmasını sağlar */
 }
 
-/* Eğer kalbin üzerindeki eski sayıyı tamamen silmek istersen 
-   Layout.css'deki .badge-count stilini sadece sepet için kullanabilirsin */
+.navbar-bottom {
+  position: relative;
+  /* Alt menü artık bu satırın en sağına hizalanacak */
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  /* ... diğer mevcut stillerin ... */
+}
+
+/* Alt Menü (Dropdown) */
+.sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  /* Navbar'ın hemen altı */
+  right: 0 !important;
+  /* Sayfanın/Navbar'ın tam sağına yapıştır */
+  left: auto !important;
+  /* Soldaki ortalamayı iptal et */
+  transform: none !important;
+  /* transform: translateX(-50%) etkisini yok et */
+
+  background-color: #ffffff;
+  min-width: 220px;
+  box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  padding: 10px 0;
+  z-index: 9999;
+  border: 1px solid #f2dce9;
+  margin-top: 0;
+}
+
+/* Hover durumunda görünür yap */
+.nav-item:hover .sub-menu {
+  display: block !important;
+}
+
+/* Alt menü içindeki linkler */
+.sub-menu a {
+  display: block !important;
+  text-align: right !important;
+  /* Yazıları da sağa yasla (isteğe bağlı) */
+  padding: 12px 20px !important;
+  border-bottom: 1px solid #fdf2f8 !important;
+}
