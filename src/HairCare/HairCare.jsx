@@ -1,60 +1,40 @@
-import React from 'react'
-import Layout from "../Layout/Layout"
-function HairCare() {
-  const products = [
-    {
-      id: 1,
-      name: "aaaaaaaaaa",
-      price: "574,90 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 2,
-      name: "bbbbbbbbbbb",
-      price: "499,00 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 3,
-      name: "ccccccccc",
-      price: "659,00 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 4,
-      name: "ddddddddddddd",
-      price: "99,00 ₺",
-      image: "https://via.placeholder.com/200"
-    },
+import Layout from "../Layout/Layout.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
 
-  ];
+function HairCare({ aramaMetni, setAramaMetni }) {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.cart?.allProducts) || [];
+
+  // Filtreleme: Hem kategori eşleşmeli hem de isim arama metnini içermeli
+  const filteredProducts = products.filter(item =>
+    item.category === "HairCare" &&
+    item.name.toLowerCase().includes(aramaMetni.toLowerCase())
+  );
 
   return (
-    <Layout>
+    <Layout aramaMetni={aramaMetni} setAramaMetni={setAramaMetni}>
       <div className="product-grid">
-        {products.map((item) => (
-          <div key={item.id} className="product-card">
-            {/* Resim */}
-            <img src={item.image} alt={item.name} className="product-image" />
-
-            {/* İsim */}
-            <h3 className="product-name">{item.name}</h3>
-
-            {/* Fiyat Bölümü */}
-            <div className="price-container">
-
-              <span className="product-price">{item.price}</span>
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((item) => (
+            <div key={item.id} className="product-card">
+              <img src={item.image} alt={item.name} className="product-image" />
+              <h3 className="product-name">{item.name}</h3>
+              <div className="price-container">
+                <span className="price-label">FIRSAT</span>
+                <span className="product-price">{item.price}</span>
+              </div>
+              <button className="add-to-cart" onClick={() => dispatch(addToCart(item))}>
+                Sepete Ekle
+              </button>
             </div>
-
-            {/* Buton */}
-            <button className="add-to-cart">Sepete Ekle</button>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p style={{ padding: "20px" }}>Aradığınız ürün bulunamadı...</p>
+        )}
       </div>
     </Layout>
   );
 }
 
 export default HairCare;
-
-///

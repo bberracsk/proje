@@ -4,7 +4,7 @@
   /* calc yerine %100 kullanıyoruz */
   min-height: calc(100vh - 160px);
   /* Header ve footer payını çıkarıyoruz */
-  background-image: url('background.png');
+  background-image: url('images/background.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -45,7 +45,7 @@
   margin-bottom: 25px;
   font-size: 18px;
   font-weight: bold;
-  color: white;
+  color: #b4036d;
   cursor: pointer;
   width: 100%;
 }
@@ -62,7 +62,7 @@
 
 .form-switch span.active {
   opacity: 1;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid #b4036d;
 }
 
 /* FORM İÇERİĞİ */

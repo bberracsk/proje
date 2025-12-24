@@ -11,6 +11,8 @@
 .navbar-container {
   width: 95%;
   padding: 10px 40px;
+  margin: 0 auto;
+  /* Ortalamayı garantiye alalım */
 }
 
 /* Üst Satır */
@@ -29,7 +31,7 @@
   min-width: fit-content;
 }
 
-/* ===== ARAMA ÇUBUĞU ===== */
+/* ===== ARAMA ÇUBUĞU (GÜNCELLENDİ) ===== */
 .search-container {
   position: relative;
   flex: 1;
@@ -41,19 +43,39 @@
 
 .search-container input {
   width: 100%;
-  padding: 10px 40px 10px 15px;
+  /* Sağ tarafa 2 ikon geleceği için padding'i artırdık */
+  padding: 10px 70px 10px 15px;
   border-radius: 8px;
   border: 1px solid #db5ca8;
   outline: none;
   background-color: #fff;
+  font-size: 14px;
 }
 
+/* Çarpı İkonu (CgClose) */
+.clear-icon {
+  position: absolute;
+  right: 42px;
+  /* Büyütecin hemen solunda */
+  cursor: pointer;
+  color: #b4036d;
+  font-size: 20px;
+  transition: 0.2s;
+}
+
+.clear-icon:hover {
+  color: #db5ca8;
+  transform: scale(1.1);
+}
+
+/* Büyüteç İkonu */
 .search-icon {
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
   color: #b4036d;
+  font-size: 18px;
 }
 
 /* Alt Satır (Kategoriler) */
@@ -72,6 +94,8 @@
   font-size: 16px;
   transition: 0.3s;
   padding-bottom: 5px;
+  cursor: pointer;
+  /* Tıklanabilir olduğunu belli eder */
 }
 
 .navbar-bottom a:hover {
@@ -96,7 +120,7 @@
   color: #db5ca8;
 }
 
-/* ===== DİĞER AYARLAR ===== */
+/* Genel Yapı */
 .layout {
   min-height: 100vh;
   display: flex;
@@ -106,8 +130,6 @@
 .content {
   flex: 1;
   width: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .footer {
@@ -115,6 +137,8 @@
   text-align: center;
   padding: 20px;
   color: #db5ca8;
+  margin-top: auto;
+  /* Footer'ı hep en aşağıya iter */
 }
 
 .social-buttons {
@@ -128,3 +152,67 @@
   color: #b4036d;
   font-size: 24px;
 }
+
+.badge-count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #db5ca8;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* Ürün Kartı Resim Alanı */
+.product-image-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Resim Üstündeki Kalp Butonu */
+.favorite-badge-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  /* Sağdan sola aldık */
+  background: rgba(255, 255, 255, 0.9);
+  /* Biraz daha belirgin yaptık */
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  /* Gölgeyi belirginleştirdik */
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.favorite-badge-icon:hover {
+  transform: scale(1.15);
+  /* Üzerine gelince biraz daha büyüsün */
+  background: white;
+}
+
+.navbar-favorite-link {
+  display: flex;
+  align-items: center;
+  color: #b4036d;
+  transition: 0.3s;
+}
+
+.navbar-favorite-link:hover {
+  color: #db5ca8;
+}
+
+.favorite-text {
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+/* Eğer kalbin üzerindeki eski sayıyı tamamen silmek istersen 
+   Layout.css'deki .badge-count stilini sadece sepet için kullanabilirsin */

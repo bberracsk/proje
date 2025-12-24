@@ -1,81 +1,42 @@
-import React from "react";
-import Layout from "../Layout/Layout";
-import "./Parfume.css"; // CSS dosyanı import etmeyi unutma
+import Layout from "../Layout/Layout.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
+import "./Parfume.css";
 
-function Parfume() {
-  // Örnek ürün listesi
-  const products = [
-    {
-      id: 1,
-      name: "zzzzzzzzzz",
-      price: "574,90 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 2,
-      name: "xxxxxxx",
-      price: "499,00 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 3,
-      name: "cccccccccccc",
-      price: "659,00 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 4,
-      name: "vvvvvvvvvvvvvvvvv",
-      price: "99,00 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 5,
-      name: "bbbbbbbbbbb",
-      price: "574,90 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 6,
-      name: "nnnnnnnnnnnnnnnnnnn",
-      price: "499,00 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 7,
-      name: "mmmmmmmmmmmmmmmmmmmm",
-      price: "659,00 ₺",
-      image: "https://via.placeholder.com/200"
-    },
-    {
-      id: 8,
-      name: "kkkkkkkkkkkkkkkk",
-      price: "99,00 ₺",
-      image: "https://via.placeholder.com/200"
-    }
-  ];
+function Parfume({ aramaMetni, setAramaMetni }) { // Parantez içine propları ekledik
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.cart?.allProducts) || [];
+
+  // Hem Parfume kategorisi olacak hem de isimde aramaMetni geçecek
+  const filteredProducts = products.filter(item =>
+    item.category === "Parfume" &&
+    item.name.toLowerCase().includes((aramaMetni || "").toLowerCase())
+  );
 
   return (
-    <Layout>
+    <Layout aramaMetni={aramaMetni} setAramaMetni={setAramaMetni}>
       <div className="product-grid">
-        {products.map((item) => (
-          <div key={item.id} className="product-card">
-            {/* Resim */}
-            <img src={item.image} alt={item.name} className="product-image" />
-
-            {/* İsim */}
-            <h3 className="product-name">{item.name}</h3>
-
-            {/* Fiyat Bölümü */}
-            <div className="price-container">
-
-              <span className="product-price">{item.price}</span>
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((item) => (
+            <div key={item.id} className="product-card">
+              <div>
+                <img src={item.image} alt={item.name} className="product-image" />
+                <h3 className="product-name">{item.name}</h3>
+              </div>
+              <div>
+                <div className="price-container">
+                  <span className="price-label">KALICI KOKU</span>
+                  <span className="product-price">{item.price}</span>
+                </div>
+                <button className="add-to-cart" onClick={() => dispatch(addToCart(item))}>
+                  Sepete Ekle
+                </button>
+              </div>
             </div>
-
-            {/* Buton */}
-            <button className="add-to-cart">Sepete Ekle</button>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p style={{ padding: "20px" }}>Aradığınız parfüm bulunamadı...</p>
+        )}
       </div>
     </Layout>
   );
